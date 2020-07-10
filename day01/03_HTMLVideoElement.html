@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <video src="../resource/video/oceans.mp4" width="500px" height="200px"><video>
+    <script>
+        let video=document.getElementsByTagName("video")[0];
+        //设置
+        video.width="600";
+        video.height="400";
+        //获取
+        console.log(video.width);
+        console.log(video.height);
+        //获取实际的高度和宽度
+        video.addEventListener("loadeddata",()=>{
+            console.log(video.videoHeight)
+            console.log(video.videoWidth)
+        })
+        //获取海报帧
+        video.poster="../resource/ad/0D0100005E2EF493395059357930375A.jpg"
+    </script>
+</body>
+</html>

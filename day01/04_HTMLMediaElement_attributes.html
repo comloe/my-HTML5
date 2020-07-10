@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <video id="video"></video><br>
+    <button onclick="setVideo()">播放视频</button>
+    <script>
+        function setVideo(){
+            let video=document.getElementById("video");
+            video.src="../resource/video/oceans.mp4";
+            video.width=480; 
+            video.height=240; 
+            video.autoplay=true;
+            video.muted=true;
+            video.controls=true
+        }
+    </script>
+</body>
+</html>

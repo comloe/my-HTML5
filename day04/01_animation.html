@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body,
+        p,
+        div,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        ul,
+        ol,
+        li {
+            padding: 0;
+            margin: 0;
+        }
+
+        #canvas {
+            background-color: #000;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        let canvasEle = document.getElementById("canvas");
+        let ctx = canvasEle.getContext("2d");
+        canvasEle.width = 1440;
+        canvasEle.height = 300;
+        let arr = [];
+
+        function Circle(x, y, r) {
+            this.x = x;
+            this.y = y;
+            this.r = r;
+            this.xDistance = Math.random() * 2 > 1 ? Math.random() * 2 : -Math.random() * 2
+            this.yDistance = Math.random() * 2 > 1 ? Math.random() * 2 : -Math.random() * 2
+        }
+
+        function init() {
+            for (var i = 0; i < 300; i++) {
+                let x = Math.random() * canvasEle.width;
+                let y = Math.random() * canvasEle.height;
+                let r = Math.ceil(Math.random() * 3) + 1;
+                let circle = new Circle(x, y, r);
+                arr.push(circle);
+            }
+        }
+
+        function draw(circle) {
+            if (circle.x > canvasEle.width || circle.x < 0) {
+                circle.xDistance = -circle.xDistance
+            }
+            if (circle.y > canvasEle.height || circle.y < 0) {
+                circle.yDistance = -circle.yDistance
+            }
+            circle.x += circle.xDistance
+            circle.y += circle.yDistance
+            ctx.fillStyle = "rgb(255,255,255,.5)"
+            ctx.beginPath();
+            ctx.arc(circle.x, circle.y, circle.r, 0, 2 * Math.PI)
+            ctx.fill()
+        }
+
+        function connect() {
+            for (var n = 0; n < arr.length; n++) {
+                for (var i = n + 1; i < arr.length; i++) {
+                    var iosX = (arr[n].x - arr[i].x) * (arr[n].x - arr[i].x);
+                    var iosY = (arr[n].y - arr[i].y) * (arr[n].y - arr[i].y);
+                    let distance = Math.sqrt(iosX + iosY);
+                    if (distance < 100) {
+                        ctx.strokeStyle = "rgba(256,23,25,.4)"
+                        ctx.beginPath();
+                        ctx.moveTo(arr[n].x, arr[n].y);
+                        ctx.lineTo(arr[i].x, arr[i].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animation() {
+            ctx.clearRect(0, 0, canvasEle.width, canvasEle.height);
+            for (var n = 0; n < arr.length; n++) {
+                draw(arr[n])
+            }
+            connect()
+            window.requestAnimationFrame(animation);
+        }
+        init();
+        animation();
+    </script>
+</body>
+
+</html>

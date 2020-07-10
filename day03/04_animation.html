@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #canvas{
+            border: 1px solid #000;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="480"></canvas>
+    <script>
+        let canvasEle=document.getElementById("canvas");
+        let ctx=canvasEle.getContext("2d");
+        let x=0;
+        let y=0;
+        let i=5;
+        let j=10;
+        let timer;
+        function animation(){
+            ctx.clearRect(0,0,canvasEle.width,canvasEle.height);
+            ctx.fillRect(x,y,50,50)
+            x+=i;
+            y+=j
+            if(x>canvasEle.width-50){
+                i=-5
+                ctx.fillStyle=`rgb(${Math.floor(Math.random()*256)},${Math.floor(Math.random()*256)},${Math.floor(Math.random()*256)})`
+            }
+            if(x<0){
+                i=5;
+                ctx.fillStyle=`rgb(${Math.floor(Math.random()*256)},${Math.floor(Math.random()*256)},${Math.floor(Math.random()*256)})`
+            }    
+            if(y>canvasEle.height-50){
+                j=-10
+                ctx.fillStyle=`rgb(${Math.floor(Math.random()*256)},${Math.floor(Math.random()*256)},${Math.floor(Math.random()*256)})`
+            }
+            if(y<0){
+                j=10;
+                ctx.fillStyle=`rgb(${Math.floor(Math.random()*256)},${Math.floor(Math.random()*256)},${Math.floor(Math.random()*256)})`
+            }  
+           timer= window.requestAnimationFrame(animation);
+        }
+    </script>
+    <button onclick="play()">播放</button>
+    <button onclick="stop()">停止</button>
+    <script>
+        let open=true;
+        function play(){
+            if(open){
+                open=false
+                animation();
+            }
+        }
+        function stop(){
+            window.cancelAnimationFrame(timer);
+            open=true;
+        }
+    </script>
+</body>
+</html>

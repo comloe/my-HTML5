@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #canvas{
+            border: 1px solid #000;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="480"></canvas>
+    <script>
+        let canvasEle=document.getElementById("canvas");
+        let ctx=canvasEle.getContext("2d");
+        //100,170,260,90,310,110,256,111
+        let array=[
+            {lable:'电脑',value:100},
+            {lable:'手机',value:170},
+            {lable:'男装',value:260},
+            {lable:'美妆',value:90},
+            {lable:'办公',value:310},
+            {lable:'家居',value:110},
+            {lable:'LV',value:256},
+            {lable:'智能',value:111},
+        ];
+
+        ctx.beginPath();
+        ctx.moveTo(100,40);
+        ctx.lineTo(100,400);
+        ctx.lineTo(700,400);
+        ctx.stroke()
+        ctx.beginPath();
+        ctx.moveTo(97,40);
+        ctx.lineTo(100,30);
+        ctx.lineTo(103,40);
+        ctx.closePath()
+        ctx.fill()
+        ctx.beginPath();
+        ctx.moveTo(700,397);
+        ctx.lineTo(710,400);
+        ctx.lineTo(700,403);
+        ctx.closePath()
+        ctx.fill()
+        let height=canvasEle.height;
+        ctx.textAlign="center"
+        ctx.font="16px 微软雅黑"
+        ctx.fillText(0,90,400)
+        let num=Math.floor((height-120)/50)
+        for(var j=1;j<=num;j++){
+            ctx.beginPath();
+            ctx.moveTo(100,height-80-j*50);
+            ctx.lineTo(90,height-80-j*50);
+            ctx.stroke()
+            ctx.fillText(j*50,75,height-75-j*50)
+        }
+        setInterval(()=>{
+        for(var i=0;i<array.length;i++){
+            ctx.fillStyle=`rgb(${Math.floor(Math.random()*256)},${Math.floor(Math.random()*256)},${Math.floor(Math.random()*256)})`
+            var elem=array[i].value;
+            var lable=array[i].lable
+            ctx.fillRect(i*75+100,height-elem-80,50,elem)
+            ctx.fillText(elem,i*75+125,height-elem-90)
+            ctx.fillText(lable,i*75+125,height-60)
+        }
+    },300)
+    </script>
+</body>
+</html>

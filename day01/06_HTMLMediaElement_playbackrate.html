@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <video id="video" src="../resource/video/200620094813622857.mp4" width="480" height="240" controls autoplay muted></video><br>
+    <button onclick="playbackRate(0.5)">0.5倍速</button><br>
+    <button onclick="playbackRate(1.0)">1.0倍速</button><br>
+    <button onclick="playbackRate(1.5)">1.5倍速</button><br>
+    <button onclick="playbackRate(2.0)">2.0倍速</button><br>
+    <button onclick="playbackRate(10)">10倍速</button><br>
+    <script>
+        function playbackRate(value){
+            let video=document.getElementById("video");
+            video.playbackRate=value;
+        }   
+    </script>
+</body>
+</html>

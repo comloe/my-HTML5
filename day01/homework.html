@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #parent{
+            width: 900px;
+            position: relative;
+            border: 1px solid #f00;
+        }
+        .video_kz{
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 80px;
+            background-color: rgba(0,0, 0, .5);
+            z-index: 10;
+        }
+        .video_floot,.video_voice{
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+            z-index: 10;
+        }
+        .video_floot>div:last-child{
+            position: absolute;
+            right: 10px;
+        }
+        .video_bar{
+            width: 850px;
+            margin: 0 auto;
+            margin-bottom: 15px;
+        }
+        .video_bar>input{
+            width: 100%;
+        }
+        .video_voice,
+        .video_voice>div{
+            margin-left: 10px;
+        }
+        .video_voice>div:last-child{
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div id="parent">
+        <div class="video_kz">
+            <!-- 进度条 -->
+            <div class="video_bar">
+                <input type="range" value="0" max="1" min="0" step="1" id="volume1" class="volume1" data-volume=0.5 oninput="">
+            </div>
+            <!-- 控制台 -->
+            <div class="video_floot">
+                <div onclick="video_play()">
+                    <img src="../resource/icons/play.png" alt="" id="video_bf">
+                </div>
+                <div class="video_voice">
+                    <div onclick="video_sy()">
+                        <img src="../resource/icons/volume-on.png" alt="" id="video_jy">   
+                    </div>
+                    <div>
+                        <input type="range" value="0.5" max="1" min="0" step="0.01" id="volume" class="volume" data-volume=0.5 oninput="sy()">
+                    </div>
+                    <div>
+                        <span id="bfsj">00:00</span>
+                        /
+                        <span id="zsj">00:00</span>
+                    </div>
+                </div>
+                <div onclick="fa()">
+                    <img src="../resource/icons/fullscreen.png" alt="" id="fa_img">
+                </div>
+            </div>
+        </div>
+        <video src="../resource/video/video.mp4" width="900" poster="../resource/poster/poster.jpg" id="video"></video>
+    </div>
+    <script>
+        let video=document.getElementById("video");
+        function video_play(){
+            if(video.paused){
+            video.play();
+            video_bf.src="../resource/icons/pause.png"
+            }else{
+                video.pause();
+            video_bf.src="../resource/icons/play.png"
+            }
+        }
+        function video_sy(){
+            if(volume.value!=0){
+                video_jy.src="../resource/icons/volume-off.png";
+                var i=volume.value;
+                volume.value=0;
+            }else{
+                video_jy.src="../resource/icons/volume-on.png";
+                volume.value=i;
+            }
+        }
+        video.addEventListener("loadeddata",()=>{
+            zsj.innerText=parseInt(video.duration);
+        })
+        video.ontimeupdate=()=>{
+            bfsj.innerText=parseInt(video.currentTime)
+        } 
+    </script>
+</body>
+</html>

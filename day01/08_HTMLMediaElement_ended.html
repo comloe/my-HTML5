@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #d1{
+            position: relative;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            width: 640px;
+        }
+        #ad{
+            position: absolute;
+            width: 400px;
+            height: 300px;
+            top: 50%;
+            left: 50%;
+            margin-top: -150px;
+            margin-left: -200px;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <div id="d1">
+        <div id="ad">
+           <a href="http://www.baidu.com"> 
+                <img src="../resource/ad/0D0100005E4149B13950593579363944.jpg" alt="" id="ad_img">
+            </a>
+        </div>
+    <video id="video" src="../resource/video/200620094813622857.mp4" width="640" onclick="toggleContril()"></video ><br>
+    </div>
+        <p>
+            <span id="current1">00:00</span>
+            /
+            <span id="duration1">00:00</span>
+        </p>
+    <button onclick="toggleContril()" onkeyup="toggleContril()">播放/暂停</button><br>
+    <script>
+        let video=document.getElementById("video");
+        function toggleContril(){
+            video.paused||video.ended?video.play():video.pause();
+        }   
+        video.onloadeddata=()=>{
+            let current=parseInt(video.currentTime)
+            let duration=parseInt(video.duration)
+            duration1.innerHTML=duration
+            console.log(current,duration);
+        }
+        video.ontimeupdate=()=>{
+            let current=parseInt(video.currentTime)
+            current1.innerHTML=current
+        }
+        video.onplay=()=>{
+            ad.style.display="none"
+        }
+        video.onpause=()=>{
+            ad.style.display="block"
+        }
+    </script>
+</body>
+</html>

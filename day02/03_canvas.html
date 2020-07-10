@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #canvas{
+            border: 1px solid #000;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <canvas width="800" height="400" id="canvas"></canvas>
+    <script>
+        let canvasEle=document.getElementById("canvas");
+        let ctx=canvasEle.getContext("2d");
+        let array=[100,170,260,90,310,110,256,365,65,85,159]; 
+        // ctx.fillStyle="rgb(55,168,79)"
+        // ctx.fillRect(0,300,50,100)
+        // ctx.fillStyle="rgb(155,68,39)"
+        // ctx.fillRect(50,230,50,170)
+        // ctx.fillStyle="rgb(169,125,87)"
+        // ctx.fillRect(100,140,50,260)
+        // ctx.fillStyle="rgb(9,65,123)"
+        // ctx.fillRect(150,310,50,90)
+        // ctx.fillStyle="rgb(129,99,12)"
+        // ctx.fillRect(200,90,50,310)
+        let height=canvasEle.height;
+        ctx.textAlign="center"
+        setInterval(()=>{
+        for(var i=0;i<array.length;i++){
+            ctx.fillStyle=`rgb(${Math.floor(Math.random()*256)},${Math.floor(Math.random()*256)},${Math.floor(Math.random()*256)})`
+            var elem=array[i];
+            ctx.fillRect(i*75,height-elem,50,elem)
+            ctx.fillText(elem,i*75+25,height-elem-20)
+        }
+    },300)
+    </script>
+</body>
+</html>

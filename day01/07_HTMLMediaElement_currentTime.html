@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <video id="video" src="../resource/video/200620094813622857.mp4" width="480" height="240" controls autoplay muted></video><br>
+    <button onclick="Cuurk(5)">快进</button><br>
+    <button onclick="Cuurk(-5)">后退</button><br>
+    <script>
+        function Cuurk(value){
+            let video=document.getElementById("video");
+            video.currentTime+=value;
+        }   
+    </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //创建HTMLAudioElement对象
+        let audio=new Audio("../resource/audio/stronger.mp3");
+        //添加控件
+        audio.controls=true
+        //追加到DOM树
+        document.body.appendChild(audio);
+    </script>
+</body>
+</html>

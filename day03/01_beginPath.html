@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #canvas{
+            border: 1px solid #000;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="400"></canvas>
+    <script>
+        let canvasEle=document.getElementById("canvas");
+        let ctx=canvasEle.getContext("2d");
+        // 开始新路径
+        ctx.beginPath();
+        // 移动到起点的指定位置
+        ctx.moveTo(100,100);
+        ctx.lineTo(115,100);
+        //指定终点路径
+        ctx.lineTo(115,285);
+        ctx.lineTo(200,285)
+        //调用stroke方法
+        ctx.lineTo(200,300)
+        ctx.lineTo(100,300)
+        ctx.closePath()
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(300,100);
+        ctx.lineTo(315,100)
+        ctx.lineTo(400,280)
+        ctx.lineTo(485,100)
+        ctx.lineTo(500,100)
+        ctx.lineTo(400,300)
+        ctx.closePath()
+        ctx.fill();
+    </script>
+</body>
+</html>
