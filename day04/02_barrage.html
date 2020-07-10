@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body,
+        p,
+        div,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        ul,
+        ol,
+        li {
+            padding: 0;
+            margin: 0;
+        }
+
+        #canvas {
+            display: block;
+            margin: 0 auto;
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <div class="container">
+        <input type="text" id="message">
+        <select id="speed">
+            <option value="1">极慢</option>
+            <option value="2">慢</option>
+            <option value="3" selected>正常</option>
+            <option value="6">超快</option>
+        </select>
+        <select id="color">
+            <option value="#000">黑色</option>
+            <option value="#f00">红色</option>
+            <option value="#0f0">绿色</option>
+            <option value="#00f">蓝色</option>
+        </select>
+        <select id="size">
+            <option value="10">超小</option>
+            <option value="12">小</option>
+            <option value="16">正常</option>
+            <option value="32">超大</option>
+        </select>
+        <button onclick="add()">发送</button>
+    </div>
+    <script>
+       
+        let canvasEle = document.getElementById("canvas");
+        let ctx = canvasEle.getContext("2d");
+        let colorEle=document.getElementById("color")
+        let sizeEle=document.getElementById("size")
+        canvasEle.width = 800;
+        canvasEle.height = 480;
+        let colors=['#f00','#0f0','#00f','#000']
+        let messages=[
+            '吾乃上将邢道荣','6666666666666','这个演员不好看','这哭真的假','这个演员不好看','这什么垃圾演技','五毛钱的特效','常唧唧说five','任：渣渣辉']
+        let barrages=[];
+        function add(){
+            var messageEle=document.getElementById("message")
+            barrages.push({
+                text:messageEle.value,
+                color:colorEle.value,
+                size:sizeEle.value,
+                spend:speed.value,
+                x:canvasEle.width,
+                y:canvasEle.height
+            })
+        }
+        message.onkeyup=()=>{
+            if(event.keyCode=='13'){
+                add();
+            }
+        }
+        messages.forEach(item=>{
+            barrages.push({
+                text:item,
+                color:colors[Math.floor(Math.random()*colors.length)],
+                size:Math.ceil(Math.random()*15)+10,
+                spend:Math.ceil(Math.random()*3)+1,
+                x:Math.ceil(Math.random()*canvasEle.width),
+                y:Math.ceil(Math.random()*canvasEle.height)
+            })
+        })
+        function draw(){
+            ctx.clearRect(0,0,canvasEle.width,canvasEle.height)
+            barrages.forEach(item=>{
+                ctx.font=item.size+'px Microsoft Yahei';
+                ctx.fillStyle=item.color;
+                item.x<=-(ctx.measureText(item.text).width)?item.x=canvasEle.width:item.x-=item.spend
+                ctx.fillText(item.text,item.x,item.y)
+            })
+            window.requestAnimationFrame(draw);
+        }
+        draw()
+    </script>
+</body>
+</html>
