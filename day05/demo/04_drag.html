@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #drag-contaner{
+            margin: auto;
+            width: 800px;
+            height: 150px;
+            line-height: 150px;
+            background-color: bisque;
+            text-align: center;
+        }
+        #heading{
+            text-align: center;
+            font:36px/1.7 'Microsoft Yahei'
+        }
+    </style>
+    <script src="./axios.min.js"></script>
+</head>
+<body>
+    <h1 id="heading">拖放上传</h1>
+    <div id="drag-contaner">文件拖放到此处上传</div>
+    <script>
+        let dragContaner=document.getElementById("drag-contaner");
+        dragContaner.addEventListener("dragover",(e)=>{
+            e.preventDefault();
+            e.stopPropagation();
+        });
+        dragContaner.addEventListener("drop",(e)=>{
+            e.preventDefault();
+            e.stopPropagation();
+            //创建FormData对象
+            let formData=new FormData();
+            //用于获取用户拖放的文件对象--fileList对象
+            let files=e.dataTransfer.files
+            //将你的文件对象依次存储到fromData中
+            if(files.length){
+                for(var i=0;i<files.length;i++){
+                    formData.append('aaa',files[i]);     
+                }
+                //将FromData提交到WEB服务器
+                axios.post('http://127.0.0.1:3000/drag',formData);
+            }
+        })
+    </script>
+</body>
+</html>
