@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #source,#target{
+            width: 200px;
+            height: 100px;
+            margin: 10px auto;
+        }
+        #source{
+            border: 2px solid red;
+        }
+        #target{
+            border: 2px solid blue;
+        }
+    </style>
+</head>
+<body>
+    <div id="source">
+       <p draggable="true" id="p">我是亚托克斯</p> 
+    </div>
+    <div id="target" draggable="true"></div>
+    <script>
+        //获取源对象
+        let pEle=document.getElementById("p")
+        let sourceEle=document.getElementById("source")
+        //源对象开始拖动时
+        pEle.addEventListener("dragstart",(e)=>{
+            e.dataTransfer.setData("LOL",e.target.innerHTML)
+        })
+        //获取目标对象
+        let targetEle=document.getElementById("target")
+        targetEle.addEventListener("dragover",(e)=>{
+            e.preventDefault();
+        })
+        //源对象在目标对象释放
+        targetEle.addEventListener("drop",(e)=>{
+           e.target.innerHTML=e.dataTransfer.getData("LOL");
+            pEle.innerHTML=""
+        })
+    </script>
+</body>
+</html>

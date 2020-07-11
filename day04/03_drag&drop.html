@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #source,#target{
+            width: 200px;
+            height: 100px;
+            margin: 10px auto;
+        }
+        #source{
+            border: 2px solid red;
+        }
+        #target{
+            border: 2px solid blue;
+        }
+    </style>
+</head>
+<body>
+    <div id="source">
+       <p draggable="true" id="p">我是一个可以被拖放的元素</p> 
+    </div>
+    <div id="target"></div>
+    <script>
+        //获取源对象
+        let pEle=document.getElementById("p")
+        //获取目标对象
+        let targetEle=document.getElementById("target")
+        //开始拖放事件
+        pEle.addEventListener("dragstart",()=>{
+            console.log("开始拖动段落了--dragstart")
+        })
+        //拖放过程中
+        pEle.addEventListener("drag",()=>{
+            console.log("你要拽那去--drag")
+        })
+        //源对象进入目标范围时
+        targetEle.addEventListener("dragenter",()=>{
+            console.log("来了老弟--dragenter")
+        })
+        //源对象在目标对象范围内悬停时
+        targetEle.addEventListener("dragover",(e)=>{
+            e.preventDefault();
+            console.log("在我头上了--dragover")
+        })
+        //源对象拖动离开目标对象范围时
+        targetEle.addEventListener("dragleave",()=>{
+            console.log("下次再见--dragleave")
+        })
+        //源对象在在目标对象释放时
+        targetEle.addEventListener("drop",(e)=>{
+            e.preventDefault()
+            e.stopPropagation()
+            console.log("现在要变化div内容了--drop")
+        })
+        //源对象被释放时触发
+       pEle.addEventListener("dragend",()=>{
+            console.log("拖放结束--dragend")
+        })
+    </script>
+</body>
+</html>
