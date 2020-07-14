@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //添加成员
+        sessionStorage.setItem("username","Tom");
+        sessionStorage.setItem("upwd","123456");
+        //访问成员
+        sessionStorage.getItem("username")
+        sessionStorage.getItem("upwd")
+        sessionStorage.removeItem("upwd");
+        //删除成员
+        sessionStorage.setItem("age","66");
+        //清空所有成员
+        sessionStorage.clear();
+    </script>
+</body>
+</html>
